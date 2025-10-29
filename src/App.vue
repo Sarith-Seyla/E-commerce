@@ -1,72 +1,123 @@
 <script setup lang="ts">
-// import { RouterLink, RouterView } from 'vue-router'
+import { ref } from 'vue'
+import Category from './components/Category.vue'
+import Promotion from './components/Promotion.vue'
 
+const categories = ref([
+  {
+    id: 1,
+    title: 'Cake & Milk',
+    itemCount: '14 items',
+    imgPath: '../src/assets/cake_milk.png',
+  },
+  {
+    id: 2,
+    title: 'Peach',
+    itemCount: '17 items',
+    imgPath: '../src/assets/peach.png',
+  },
+  {
+    id: 3,
+    title: 'Oganic Kiwi',
+    itemCount: '21 items',
+    imgPath: '../src/assets/Oganic Kiwi.png',
+  },
+  {
+    id: 4,
+    title: 'Red Apple',
+    itemCount: '68 items',
+    imgPath: '../src/assets/apple.png',
+  },
+  {
+    id: 5,
+    title: 'Snack',
+    itemCount: '34 items',
+    imgPath: '../src/assets/snack.png',
+  },
+  {
+    id: 6,
+    title: 'Black Plun',
+    itemCount: '25 items',
+    imgPath: '../src/assets/black_plum.png',
+  },
+  {
+    id: 7,
+    title: 'Vegetables',
+    itemCount: '65 items',
+    imgPath: '../src/assets/vegetable.png',
+  },
+  {
+    id: 8,
+    title: 'Headphone',
+    itemCount: '33 items',
+    imgPath: '../src/assets/headphone.png',
+  },
+  {
+    id: 9,
+    title: 'Cake & Milk',
+    itemCount: '54 items',
+    imgPath: '../src/assets/cake.png',
+  },
+  {
+    id: 10,
+    title: 'Orange',
+    itemCount: '63 items',
+    imgPath: '../src/assets/orange.png',
+  },
+])
+
+const promotions = ref([
+  {
+    id: 1,
+    title: 'Everyday Fresh & \nClean with Our \nProducts',
+    imgPath: '../src/assets/onion.jpg',
+  },
+  {
+    id: 2,
+    title: 'Make your Breakfast \nHealthy and Easy',
+    imgPath: '../src/assets/juice.png',
+  },
+  {
+    id: 3,
+    title: 'The best Organic \nProducts Online',
+    imgPath: '../src/assets/organic.jpg',
+  },
+])
 </script>
 
 <template>
-<div>This is my first VueJs project</div>
+  <div class="box">
+    <Category
+      class="category-list"
+      v-for="category in categories"
+      :key="category.id"
+      :model-value="category.id"
+      :title="category.title"
+      :item="category.itemCount"
+      :image="category.imgPath"
+    />
+  </div>
+  <Promotion
+    class="promotion"
+    v-for="promotion in promotions"
+    :key="promotion.id"
+    :model-value="promotion.id"
+    :title="promotion.title"
+    :image="promotion.imgPath"
+  />
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.category-list {
+  margin: 10px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.box {
+  display: flex;
+  margin: 0;
 }
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.promotion {
+  margin: 10px;
+  float: left;
 }
 </style>
