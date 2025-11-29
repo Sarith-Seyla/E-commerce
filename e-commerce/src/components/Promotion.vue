@@ -37,7 +37,7 @@ export default defineComponent({
   height: 290px;
   background-color: #f0e8d5;
   border-radius: 10px;
-  margin: 10px;
+  margin: 0px;
   float: left;
 }
 .Btn {

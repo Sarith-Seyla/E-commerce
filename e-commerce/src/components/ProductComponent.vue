@@ -59,12 +59,11 @@ export default {
 <style scoped>
 /* Main Card Style */
 .product-card {
-  width: 298px; 
-  height: 402px;
+  width: 280px; 
   background-color: #fff;
   border: 1px solid #ececec;
   border-radius: 15px;
-  padding: 20px;
+  padding: 18px;
   position: relative;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
