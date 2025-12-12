@@ -1,9 +1,31 @@
 <template>
   <div class="app-container">
-    <!-- <MenuItemComponent 
-      title="Melon" 
-      :items="categories" 
-    /> -->
+
+
+
+    <div class="header">
+      <div>
+          <img src="../assets/logo.png" alt=""></img>
+      </div>
+      <div class="SearchBox">
+          <SearchBox />
+      </div>
+      
+      <MenuItemComponent label="Home" />
+
+    </div>
+
+    <div>
+      <ul class="nav-list">
+        <MenuItemComponent label="Hot Deals" :isHot="true" />
+
+        <MenuItemComponent label="Home" />
+
+        <MenuItemComponent label="Vegetables" :hasDropdown="true" />
+      </ul>
+    </div>
+
+    <ShowCase/>
 
     <MenuComponent 
       title="Featured Categories" 
@@ -54,6 +76,8 @@ import Promotion from '../components/Promotion.vue';
 import ProductComponent from '../components/ProductComponent.vue';
 import MenuComponent from '../components/MenuComponent.vue';
 import MenuItemComponent  from '../components/MenuItemComponent.vue';
+import ShowCase from '../components/ShowCase.vue';
+import SearchBox from '../components/SearchBox.vue';
 
 export default {
     name: 'HomeView',
@@ -62,7 +86,9 @@ export default {
         Promotion,
         ProductComponent,
         MenuComponent,
-        MenuItemComponent
+        MenuItemComponent,
+        ShowCase,
+        SearchBox
     },
     computed: {
 
@@ -82,13 +108,33 @@ export default {
 </script>
 
 <style>
+.header{
+  /* background-color: blue; */
+  display: flex;
+}
+.header .SearchBox{
+  align-items: center;
+  justify-content: center;
+  padding-left: 60px;
+}
+
+.nav-list{
+  display: flex;
+  gap: 20px;
+}
+
+
+
+
+
+
 
 .app-container {
   max-width: 1600px;
   margin: 0 auto;
   padding: 5px;
   font-family: 'Quicksand', sans-serif;
-
+  background-color: aquamarine;
 }
 
 .grid-container {
@@ -98,6 +144,6 @@ export default {
   margin-bottom: 50px;
   align-items: center;
   justify-content: center;
-  
+  background-color: blueviolet;
 }
 </style>
