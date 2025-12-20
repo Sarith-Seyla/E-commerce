@@ -11,17 +11,45 @@
           <SearchBox />
       </div>
       
-      <MenuItemComponent label="Home" />
+      <div class="header_menu"> 
+          <img src="../assets/account_icon.png"></img>
+          <MenuItemComponent label="Account" >   </MenuItemComponent> 
+
+          <img src="../assets/compare_icon.png"></img>
+          <MenuItemComponent label="Compare" >   </MenuItemComponent> 
+
+          <img src="../assets/heart_icon.png"></img>
+          <MenuItemComponent label="Wishlist" >   </MenuItemComponent> 
+
+          <img src="../assets/shopping_icon.png"></img>
+          <MenuItemComponent label="Cart" >   </MenuItemComponent> 
+      </div>
 
     </div>
 
     <div>
       <ul class="nav-list">
+        <div class="menu_box">
+          <MenuItemComponent label="Browse All Categories" :allCategories="true" :hasDropdown="true"/>
+        </div>
         <MenuItemComponent label="Hot Deals" :isHot="true" />
-
         <MenuItemComponent label="Home" />
-
+        <MenuItemComponent label="Food" :hasDropdown="true" />
         <MenuItemComponent label="Vegetables" :hasDropdown="true" />
+        <MenuItemComponent label="Drink"/>
+        <MenuItemComponent label="Cookies"/>
+        <MenuItemComponent label="Meat&Seafood" :hasDropdown="true"/>
+        <MenuItemComponent label="Bakery"/>
+
+        <div class="call_box">
+            <img src="../assets/call_icon.png" alt="" style="width: 50px; height: 50px; margin-right: 10px;"></img>
+            <div>
+                <span style="font-size: 24px; color: green; font-weight: bold;">099 777 888</span><br>
+                <span style="font-size: 14px; color: #7E7E7E;">24/7 Support Center</span>
+            </div>
+
+        </div>
+
       </ul>
     </div>
 
@@ -120,15 +148,30 @@ export default {
 
 .nav-list{
   display: flex;
-  gap: 20px;
+  gap: 50px;
 }
 
+.header_menu{
+  display: flex;
+}
+.header_menu img{
+  margin-top: 30px;
+  width: 20px;
+  height: 20px;
+  margin-left: 30px;
+  margin-right: 5px;
+}
+.menu_box{
+  height: 44px;
+  width: 250px;
+  background-color: #3BB77E;
+  border-radius: 5px;
+  align-content: center;
+}
 
-
-
-
-
-
+.call_box{
+  display: flex;
+}
 .app-container {
   max-width: 1600px;
   margin: 0 auto;

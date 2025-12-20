@@ -43,7 +43,9 @@ const subscribe = () => {
 
 }
 .hero-content {
-  background-color: #FDF0D5; /* Light beige background */
+  background-color: #FDF0D5;
+  background-image: url('../assets/bg_showcase.png');
+  background-size: 50%;
   border-radius: 20px;
   display: flex;
   align-items: center;

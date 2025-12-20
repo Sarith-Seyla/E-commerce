@@ -1,10 +1,11 @@
 <template>
   <li class="menu-item" :class="{ 'is-hot': isHot }">
-    <span v-if="isHot" class="icon">🔥</span>
+    <span v-if="isHot" class="icon"><img src="../assets/fire_icon.png" alt=""></span>
+    <span v-if="allCategories" class="icon"><img src="../assets/box_list_icon.png" alt="" style="margin-left: 30px;"></span>
 
-    <span class="label">{{ label }}</span>
+    <span class="label">{{ label }} </span>
 
-    <span v-if="hasDropdown" class="arrow">⌄</span>
+    <span v-if="hasDropdown" class="arrow" ><img src="../assets/dropdown.png" alt=""></span>
   </li>
 </template>
 
@@ -23,7 +24,11 @@ defineProps({
   hasDropdown: {
     type: Boolean,
     default: false
-  }
+  },
+  allCategories: {
+    type: Boolean,
+    default: false
+  },
 });
 </script>
 
@@ -36,24 +41,25 @@ defineProps({
   font-family: 'Quicksand', sans-serif;
   font-weight: 700;
   font-size: 15px;
-  color: #253d4e; /* Dark blue/grey from your design */
+  color: #253d4e; 
   transition: color 0.2s ease;
-  list-style: none; /* Removes bullet points if used in ul */
+  list-style: none;
 }
 
-/* Hover Effect */
+
 .menu-item:hover {
-  color: #3bb77e; /* Green brand color */
+  color: #3bb77e;
 }
 
-/* Arrow Styling */
 .arrow {
   font-size: 12px;
-  margin-top: 2px; /* Slight visual adjustment */
+  margin-top: 0px; 
 }
 
-/* Hot Deal Specific Styles */
 .is-hot .icon {
   font-size: 16px;
+}
+.label{
+  color: black;
 }
 </style>
