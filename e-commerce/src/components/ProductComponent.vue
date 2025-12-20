@@ -1,5 +1,5 @@
 <template>
-  <div class="product-card">
+  <div class="product-card" @click="navigateToProduct">
     <div class="badge-container">
       <span 
           v-if="product.promotionAsPercentage" class="badge" :class="{
@@ -35,7 +35,7 @@
           <div class="current-price">${{ product.price }}</div>
           <div class="old-price">$2.80</div>
         </div>
-        <button class="add-btn">
+        <button class="add-btn" @click.stop="addToCart">
           Add <span class="plus">+</span>
         </button>
       </div>
@@ -50,6 +50,20 @@ export default {
     product: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    navigateToProduct() {
+      if (this.product.id) {
+        this.$router.push({
+          name: 'product',
+          params: { productId: this.product.id }
+        });
+      }
+    },
+    addToCart() {
+      // Add to cart logic here
+      console.log('Added to cart:', this.product.name);
     }
   }
 }

@@ -1,8 +1,8 @@
 <template>
-  <div class="pro_container" :style="{ backgroundColor: promotion.color }">
+  <div class="pro_container" :style="{ backgroundColor: promotion.color }" @click="navigateToPromotion">
     <img :src="promotion.image" alt="Promotion Image" :class="{ 'juice-image': promotion.title.includes('Breakfast') }" />
     <div class="text" v-html="promotion.title"></div>
-    <Btn class="Btn" :buttonColor="promotion.buttonColor" @click="shopNow(promotion)" />
+    <Btn class="Btn" :buttonColor="promotion.buttonColor" @click.stop="shopNow(promotion)" />
   </div>
 </template>
 
@@ -23,8 +23,15 @@ export default defineComponent({
   emits: ['shop'],
   methods: {
     shopNow(promotion: Record<string, any>) {
-      alert("Let's shop: " + promotion.title)
       this.$emit('shop', promotion)
+    },
+    navigateToPromotion() {
+      if (this.promotion.id) {
+        this.$router.push({
+          name: 'promotion',
+          params: { promotionId: this.promotion.id }
+        });
+      }
     }
   }
 })

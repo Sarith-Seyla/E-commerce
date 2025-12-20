@@ -9,6 +9,24 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
     },
+
+    {
+      path: '/categories/:categoryId',
+      name: 'category',
+      component: () => import('../views/CategoryView.vue'),
+    },
+    {
+      path: '/promotions/:promotionId',
+      name: 'promotion',
+      component: () => import('../views/PromotionView.vue'),
+    },
+    {
+      path: '/products/:productId',
+      name: 'product',
+      component: () => import('../views/ProductView.vue'),
+    },
+
+
     // {
     //   path: '/about',
     //   name: 'about',

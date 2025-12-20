@@ -1,5 +1,5 @@
 <template>
-  <div class="container" :style="{ backgroundColor: color }">
+  <div class="container" :style="{ backgroundColor: color }" @click="navigateToCategory">
     <img :src="image" alt="Category Image" />
     <div class="title">{{ name }}</div>
     <div class="item_num">{{ productCount }} items</div>
@@ -7,8 +7,24 @@
 </template>
 
 <script lang="ts">
+import { useRouter } from 'vue-router'
+
 export default {
-  props: ['name', 'productCount', 'color', 'image']
+  props: ['name', 'productCount', 'color', 'image', 'categoryId'],
+  setup() {
+    const router = useRouter();
+    return { router };
+  },
+  methods: {
+    navigateToCategory() {
+      if (this.categoryId) {
+        this.$router.push({
+          name: 'category',
+          params: { categoryId: this.categoryId }
+        });
+      }
+    }
+  }
 };
 </script>
 
@@ -18,6 +34,7 @@ export default {
   height: 177px;
   border-radius: 10px;
   float: left;
+  cursor: pointer;
 }
 
 img {

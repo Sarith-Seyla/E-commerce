@@ -52,79 +52,53 @@
       </div>
     </div>
 
-    <ShowCase/>
-
-    <MenuComponent 
-      title="Featured Categories" 
-      :items="categories" 
-    />
-    
-    <div class="grid-container">
-      <Category
-        v-for="category in categories"
-        :key="category.name"
-        :name="category.name"
-        :productCount="category.productCount"
-        :color="category.color"
-        :image="category.image"
-        :categoryId="category.id"
-      />
-    </div>
-
-    <div class="grid-container">
-      <Promotion
-        v-for="promotion in promotions"
-        :key="promotion.title"
-        :promotion="promotion"
-      />
-    </div>
-
-    <MenuComponent 
-      title="Popular Products" 
-      :items="categories" 
-    />
-
-    <div class="grid-container">
-      <ProductComponent
-        v-for="product in popularProducts"
-        :key="product.id"
-        :product="product"
-      />
+    <!-- Category Banner -->
+    <div class="category-banner" v-if="currentCategory" :style="{ backgroundColor: currentCategory.color }">
+      <div class="banner-content">
+        <h1>{{ currentCategory.name }}</h1>
+        <div class="breadcrumb">
+          <router-link to="/">Home</router-link>
+          <span> > </span>
+          <router-link to="/">Categories</router-link>
+          <span> > </span>
+          <span>{{ currentCategory.name }}</span>
+        </div>
+      </div>
     </div>
 
   </div>
 </template>
 
 <script lang="ts">
-import { mapState, mapActions } from 'pinia';
+import { mapState, mapGetters, mapActions } from 'pinia';
 import { useProductStore } from '../stores/product.js';
 
-import Category from '../components/Category.vue';
-import Promotion from '../components/Promotion.vue';
-import ProductComponent from '../components/ProductComponent.vue';
 import MenuComponent from '../components/MenuComponent.vue';
 import MenuItemComponent  from '../components/MenuItemComponent.vue';
-import ShowCase from '../components/ShowCase.vue';
 import SearchBox from '../components/SearchBox.vue';
 
 export default {
-    name: 'HomeView',
+    name: 'CategoryView',
     components: {
-        Category,
-        Promotion,
-        ProductComponent,
         MenuComponent,
         MenuItemComponent,
-        ShowCase,
         SearchBox
     },
     computed: {
-
-        ...mapState(useProductStore, {
-        categories: 'categories',
-        promotions: 'promotions',
-        popularProducts: 'getPopularProducts' 
-        })
+        ...mapState(useProductStore, ['categories', 'products']),
+        ...mapGetters(useProductStore, ['getProductsByCategory']),
+        
+        categoryId() {
+            return this.$route.params.categoryId;
+        },
+        
+        currentCategory() {
+            return this.categories.find(cat => cat.id == this.categoryId);
+        },
+        
+        categoryProducts() {
+            return this.getProductsByCategory(parseInt(this.categoryId));
+        }
     },
     methods: {
         ...mapActions(useProductStore, ['fetchAllData'])
@@ -147,6 +121,7 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .header{
+  /* background-color: blue; */
   display: flex;
 }
 .header .SearchBox{
@@ -167,7 +142,7 @@ export default {
   margin-top: 30px;
   width: 20px;
   height: 20px;
-  margin-left: 25px;
+  margin-left: 30px;
   margin-right: 5px;
 }
 .menu_box{
@@ -187,6 +162,67 @@ export default {
   padding: 5px;
   padding-top: 120px;
   font-family: 'Quicksand', sans-serif;
+}
+
+.category-banner {
+  padding: 40px 20px;
+  margin-top: 50px;
+  border-radius: 5px;
+  color: #253D4E;
+  background-image: url('../assets/bg_showcase.png');
+  background-size: 90%;
+  background-blend-mode: lighten;
+}
+
+.banner-content h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 0 0 20px 0;
+}
+
+.breadcrumb {
+  font-size: 14px;
+}
+
+.breadcrumb a {
+  color: #253D4E;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  margin: 0 5px;
+}
+
+.products-section {
+  margin: 50px 0;
+  padding: 20px;
+}
+
+.products-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #253d4e;
+}
+
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-products {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+  font-size: 18px;
 }
 
 .grid-container {
