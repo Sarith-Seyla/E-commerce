@@ -8,8 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Role;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable{
 
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -26,31 +25,38 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected function casts(): array
-    {
+    protected function casts(): array{
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
 
-    public function roles()
-    {
+    public function roles(){
         return $this->belongsToMany(Role::class); // uses role_user pivot table
     }
 
-    public function hasRole(string $role): bool
-    {
+    public function hasRole(string $role): bool{
         return $this->roles()->where('name', $role)->exists();
     }
 
-    public function hasPermission(string $permission): bool
-    {
+    public function hasPermission(string $permission): bool{
         return $this->roles()
             ->whereHas('permissions', function ($q) use ($permission) {
                 $q->where('name', $permission);
             })
             ->exists();
+    }
+
+    // A user can be an author or audience, and write comments
+    public function author() {
+        return $this->hasOne(Author::class);
+    }
+    public function audiences() {
+        return $this->hasMany(Audience::class);
+    }
+    public function comments() {
+        return $this->hasMany(Comment::class);
     }
 
 
