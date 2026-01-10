@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Author extends Model
-{
+class Author extends Model{
+
+    protected $fillable = ['name', 'user_id'];
+    
     // 1. An author has one user 
     public function user() {
         return $this->belongsTo(User::class);
